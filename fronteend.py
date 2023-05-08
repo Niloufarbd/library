@@ -218,19 +218,6 @@ def view_command():
 b1=Button(win,text="view all",width=10,command=view_command)
 b1.place(x=410,y=85)
 
-bookes = book_text.get()
-teacheres = teacher_text.get()
-yeares = year_text.get()
-isbnes = isbn_text.get()
-
-nemes = nameM.get()
-familyMes = familyM.get()
-birthMes = birthM.get()
-codeMes = codeM.get()
-
-name_tes = name_t.get()
-family_tes = family_t.get()
-tahsilat_tes = tahsilat_t.get()
 
 def search_command():
     clearList1()
@@ -248,10 +235,12 @@ b2.place(x=410,y=120)
 
 
 def add_command():
+
     bookes = book_text.get()
     teacheres = teacher_text.get()
     yeares = year_text.get()
     isbnes = isbn_text.get()
+
 
 
     if bookes == "": bookes ="___"
@@ -259,7 +248,16 @@ def add_command():
     if yeares == "" : yeares = "___"
     if isbnes == "" : isbnes = "___"
 
+
+
     book = backend.insert1(bookes, teacheres, yeares, isbnes)
+    bookes = book_text.get()
+    teacheres = teacher_text.get()
+    yeares = year_text.get()
+    isbnes = isbn_text.get()
+    a=backend.check1()
+    b=backend.deleteRuw1()
+
     nemes = nameM.get()
     familyMes = familyM.get()
     birthMes = birthM.get()
@@ -271,18 +269,31 @@ def add_command():
     if codeMes == "" : codeMes = "___"
 
     member = backend.insert2(nemes, familyMes, birthMes, codeMes)
+    nnemes = nameM.get()
+    familyMes = familyM.get()
+    birthMes = birthM.get()
+    codeMes = codeM.get()
+    a=backend.check2()
+    b=backend.deleteRuw2()
+
     name_tes = name_t.get()
     family_tes = family_t.get()
     tahsilat_tes = tahsilat_t.get()
+
 
     if name_tes == "": name_tes = "___"
     if family_tes == "": family_tes = "___"
     if tahsilat_tes == "" : tahsilat_tes = "___"
 
     management = backend.insert3(name_tes, family_tes, tahsilat_tes)
+    name_tes = name_t.get()
+    family_tes = family_t.get()
+    tahsilat_tes = tahsilat_t.get()
     a = backend.deleteEmptyRows()
     b =backend.deleteEmptyRows1()
     c = backend.deleteEmptyRows2()
+    d=backend.check3()
+    e=backend.deleteRuw3()
     view_command()
 
 

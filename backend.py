@@ -18,6 +18,24 @@ def insert1(book,teacher,year,isbn):
     conn.commit()
     conn.close()
 
+def check1():
+    conn = sqlite3.connect("books.db")
+    cur = conn.cursor()
+    cur.execute("select book,teacher,year,isbn,count(*)as cnt from books group by book,teacher,year,isbn having count(*)>1")
+    rows=cur.fetchall()
+    conn.close()
+    return rows
+
+
+def deleteRuw1():
+    conn = sqlite3.connect("books.db")
+    cur = conn.cursor()
+    cur.execute("delete from books where ID not in(select max(ID)as MaxRecordID from books group by book,teacher,year,isbn)")
+    rows=cur.fetchall()
+    conn.commit()
+    conn.close()
+    return rows
+
 def viewall1():
     conn = sqlite3.connect("books.db")
     cur = conn.cursor()
@@ -73,8 +91,25 @@ def insert2(name,family,birth,code):
     cur.execute("insert into members values (null,?,?,?,?)",(name,family,birth,code))
     conn.commit()
     conn.close()
-h='hi python'
-print(h)
+def check2():
+    conn = sqlite3.connect("books.db")
+    cur = conn.cursor()
+    cur.execute("select name,family,birth,code,count(*)as cnt from members group by name,family,birth,code having count(*)>1")
+    rows=cur.fetchall()
+    conn.close()
+    return rows
+
+
+def deleteRuw2():
+    conn = sqlite3.connect("books.db")
+    cur = conn.cursor()
+    cur.execute("delete from members where ID not in(select max(ID)as MaxRecordID from members group by name,family,birth,code)")
+    rows=cur.fetchall()
+    conn.commit()
+    conn.close()
+    return rows
+
+
 def viewall2():
     conn = sqlite3.connect("books.db")
     cur = conn.cursor()
@@ -130,7 +165,25 @@ def insert3(name,family,tahsilat):
         "insert into management values (null,?,?,?)",(name,family,tahsilat))
     conn.commit()
     conn.close()
-    
+
+def check3():
+    conn = sqlite3.connect("books.db")
+    cur = conn.cursor()
+    cur.execute("select name,family,tahsilat,count(*)as cnt from management group by name,family,tahsilat having count(*)>1")
+    rows=cur.fetchall()
+    conn.close()
+    return rows
+
+
+def deleteRuw3():
+    conn = sqlite3.connect("books.db")
+    cur = conn.cursor()
+    cur.execute("delete from management where ID not in(select max(ID)as MaxRecordID from management group by name,family,tahsilat)")
+    rows=cur.fetchall()
+    conn.commit()
+    conn.close()
+    return rows
+
 def viewall3():
     conn = sqlite3.connect("books.db")
     cur = conn.cursor()
@@ -195,13 +248,6 @@ def check():
     conn.close()
     return rows
 
-# def ee():
-#     conn = sqlite3.connect("books.db")
-#     cur = conn.cursor()
-#     cur.execute("select * from ReservBooks where ID not in (select max(ID) from ReservBooks group by nameBook,bookId,ExpireTime)")
-#     rows=cur.fetchall()
-#     conn.close()
-#     return rows
 
 def deleteRuw():
     conn = sqlite3.connect("books.db")
@@ -211,4 +257,5 @@ def deleteRuw():
     conn.commit()
     conn.close()
     return rows
+
 connect()
