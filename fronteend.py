@@ -140,7 +140,6 @@ def get_selected_row2(event):
 
     if len(listBox2.curselection())>0:
         index = listBox2.curselection()[0]
-        # print(index)
         Selectedrow = listBox2.get(index)
 
         EntryLabel5.delete(0, END)

@@ -1,7 +1,6 @@
 import sqlite3
 
 from datetime import date
-today=date.today()
 
 def connect():
     conn=sqlite3.connect("books.db")
